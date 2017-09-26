@@ -1,6 +1,7 @@
 //Dependencies
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3000
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
@@ -16,11 +17,16 @@ app.use('/seed', seedController);
 
 
 //Connections
-mongoose.connect('mongodb://localhost:27017/book_app');
-mongoose.connection.once('open', ()=>{
-  console.log('connected to mongo');
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/book_app';
+mongoose.connect(mongoUri);
+
+mongoose.connection.once('open', ()=> {
+  console.log('connect to mongo')
 })
 
-app.listen(3000, () => {
-  console.log('listening')
+
+
+
+app.listen(port, () => {
+  console.log('I have started listening for requests')
 })
