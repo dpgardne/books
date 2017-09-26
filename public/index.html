@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="bookApp">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+
+  <!-- JS -->
+  <script src="/app/app.js" charset="utf-8"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Goudy+Bookletter+1911" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/app.css">
+
+  <title>Book Application</title>
+</head>
+<body ng-controller="mainController as ctrl">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <h1 class="title">Book Database</h1>
+      </div>
+
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 info"  ng-repeat="book in ctrl.books">
+        Title: {{book.title}} <br />
+        Author: {{book.author}} <br />
+        Description: {{book.description}} <br />
+
+        <!-- delete book -->
+        <button ng-click="ctrl.deleteBook(book)" class="btn btn-default">Delete</button>
+        <!-- edit book -->
+        <a href="#" class="btn btn-default" ng-click="ctrl.index = $index">Edit</a>
+        <form ng-if="$index===ctrl.index"  ng-submit="ctrl.editBook(book)">
+          Title: <br /> <input type="text" ng-model="ctrl.editedTitle" placeholder="{{book.title}}"> <br /> <br />
+          Author:  <br /> <input type="text" ng-model="ctrl.editedAuthor" placeholder="{{book.author}}"> <br /> <br />
+          Description: <br />  <input type="text" ng-model="ctrl.editedDescription" placeholder="{{book.description}}"> <br /> <br />
+          <input type="submit" value="Edit" class="btn btn-default">
+        </form>
+      </div>
+    </div>
+    <!-- add book -->
+    <div class="row">
+      <div class="col-xs-2 add">
+        <h5> Add to Library </h5>
+        <form ng-submit="ctrl.createBooks();">
+          Title: <br /> <input type="text" ng-model="ctrl.title" placeholder="title"> <br /> <br />
+          Author:  <br /> <input type="text" ng-model="ctrl.author" placeholder="author"> <br /> <br />
+          Description: <br />  <input type="text" ng-model="ctrl.description" placeholder="description"> <br /> <br />
+          <input type="submit" value="Add" class="btn btn-default">
+        </form>
+      </div>
+
+  </div>
+</body>
+</html>
